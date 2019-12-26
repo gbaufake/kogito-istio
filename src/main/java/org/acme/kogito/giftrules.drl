@@ -1,0 +1,13 @@
+package org.acme.kogito
+
+import org.acme.kogito.model.Gift;
+
+rule "Is Christmas Gift" ruleflow-group "gift"
+
+when
+    $gift: Gift(name == "Christmas")
+then
+    modify($gift) {
+    	setChristmasGift(true)
+    };
+end
