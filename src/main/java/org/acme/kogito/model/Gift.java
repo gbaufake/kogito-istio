@@ -9,7 +9,15 @@ public class Gift {
         this.name = name;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public boolean isChristmasGift() {
+        return christmasGift;
+    }
+
+    public boolean getChristmasGift() {
         return christmasGift;
     }
 
