@@ -2,10 +2,11 @@ package org.acme.kogito
 
 import org.acme.kogito.model.Gift;
 
-rule "Is Christmas Gift" ruleflow-group "gift"
-
+rule "Is Christmas Gift" 
+ruleflow-group "gift"
+no-loop true
 when
-    $gift: Gift(name == "Christmas")
+    $gift: Gift(name.equals("Christmas"))       
 then
     modify($gift) {
     	setChristmasGift(true)
