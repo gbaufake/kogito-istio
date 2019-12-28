@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/kogito-quickstart .
+# docker build -f src/main/docker/Dockerfile.native -t quarkus/kogito-istio .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/kogito-quickstart
+# docker run -i --rm -p 8080:8080 quarkus/kogito-istio
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal
