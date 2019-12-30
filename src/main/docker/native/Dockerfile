@@ -7,7 +7,7 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/kogito-istio .
+# docker build -f src/main/docker/native/Dockerfile -t gbaufake/kogito-istio .
 #
 # Then run the container using:
 #

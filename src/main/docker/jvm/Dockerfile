@@ -7,7 +7,7 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/kogito-istio-jvm .
+# docker build -f src/main/docker/jvm/Dockerfile -t quarkus/kogito-istio-jvm .
 #
 # Then run the container using:
 #
