@@ -4,3 +4,8 @@ create-v1-image:
 push-v1-image:
 	docker push quay.io/gbaufake/kogito-istio:v1
 
+
+deploy-kogito-istio:
+	oc project kogito-istio
+	oc create -f src/main/kubernetes/service.yaml
+	oc create -f src/main/kubernetes/deployment.yaml

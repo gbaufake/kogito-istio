@@ -1,0 +1,9 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traffic-generator-config
+data:
+  duration: "0"
+  route: "http://route-kogito-istio.apps.gbaufake-c7.devcluster.openshift.com/"
+  rate: "1"
