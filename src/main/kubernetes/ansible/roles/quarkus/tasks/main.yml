@@ -1,0 +1,34 @@
+- name: Create Openshift Route
+  k8s:
+    state: present
+    definition: "{{ lookup('template', item.file) }}"
+  with_items:
+   - {file: 'templates/istio/quarkus-route.yml'}
+  register: route
+
+- name: Deploy Kogito Istio Istio Gateway
+  k8s:
+    state: present
+    definition: "{{ lookup('template', item.file) }}"
+  with_items:
+   - {file: 'templates/istio/quarkus-gateway.yml'}
+   - {file: 'templates/istio/quarkus-vs.yml'}
+
+
+# - name: Deploy Bookinfo Destination Rules
+#   k8s:
+#     state: present
+#     definition: "{{ lookup('template', item.file) }}"
+#   with_items:
+#    - {file: 'templates/istio/bookinfo-productpage-dr.yml'} 
+
+# - name: Set Full Route for Traffic Generator
+#   set_fact:
+#     full_route: "http://{{ route.results[0]['result']['spec']['host'] }}/productpage"
+
+# - name: Create the traffic generator
+#   include_role: 
+#     name: traffic-generator
+#   vars:
+#     namespace: "{{ bookinfo.namespace }}"
+#     route: "{{ full_route }} "

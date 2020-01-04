@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ quarkus.namespace }}-vs
+  namespace: {{ quarkus.namespace }}
+spec:
+  hosts:
+  - {{ route.results[0]['result']['spec']['host'] }}
+  gateways:
+  - {{ quarkus.namespace }}-gateway
+  http:
+  - match:
+    - uri:
+        exact: /
+    route:
+    - destination:
+        host: kogito-istio
+        port:
+          number: 8080
