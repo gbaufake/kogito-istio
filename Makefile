@@ -12,6 +12,10 @@ push-v1-image:
 
 
 deploy-kogito-istio:
+	oc new-project kogito-istio
 	oc project kogito-istio
 	oc create -f src/main/kubernetes/service.yaml
 	oc create -f src/main/kubernetes/deployment.yaml
+
+deploy-istio-gateway:
+	ansible-playbook src/main/kubernetes/ansible/quarkus.yml -e '{"quarkus": {"namespace": "kogito-istio", "control_plane_namespace": "istio-system"}}' -v

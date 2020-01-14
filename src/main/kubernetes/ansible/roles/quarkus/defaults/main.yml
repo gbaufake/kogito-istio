@@ -1,0 +1,5 @@
+---
+# defaults file for kogito-istio
+quarkus:
+  namespace: kogito-istio
+  control_plane_namespace: istio-system

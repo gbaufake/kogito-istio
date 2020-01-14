@@ -5,5 +5,5 @@ metadata:
   name: traffic-generator-config
 data:
   duration: "0"
-  route: "http://route-kogito-istio.apps.gbaufake-c7.devcluster.openshift.com/"
+  route: ""
   rate: "1"
