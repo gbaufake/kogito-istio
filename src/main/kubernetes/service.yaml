@@ -5,9 +5,12 @@ metadata:
   namespace: 
   labels:
     app: kogito-istio
+    service: kogito-istio
 spec:
   ports:
-  - port: 8080
-    name: http
+  - name: http
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
   selector:
     app: kogito-istio

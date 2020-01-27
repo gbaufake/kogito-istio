@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: example
+spec:
+  path: /
+  to:
+    kind: Service
+    name: kogito-istio
+    weight: 100
+  port:
+    targetPort: http
