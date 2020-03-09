@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: kogito-istio-v1
+  name: heavy-delivery-v1
 spec:
   replicas: 1
   template:
@@ -9,8 +9,8 @@ spec:
       annotations:
         sidecar.istio.io/inject: "false"
       labels:
-        app: kogito-istio
-        version: v1
+        app: delivery
+        version: heavy
     spec:
       containers:
       - name: kogito-istio-v1
