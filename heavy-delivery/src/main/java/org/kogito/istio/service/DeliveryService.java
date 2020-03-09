@@ -1,60 +1,44 @@
 package org.kogito.istio.service;
 
-import java.time.Duration;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
 import javax.enterprise.context.ApplicationScoped;
 
 import org.kogito.istio.model.Order;
-import org.kogito.istio.model.Parcel;
-import org.kogito.istio.model.Route;
-import org.kogito.istio.model.Truck;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+import org.apache.kafka.common.serialization.Serdes;
+import org.apache.kafka.streams.StreamsBuilder;
+import org.apache.kafka.streams.Topology;
+import org.apache.kafka.streams.kstream.Consumed;
+import org.apache.kafka.streams.kstream.GlobalKTable;
+import org.apache.kafka.streams.kstream.Materialized;
+import org.apache.kafka.streams.kstream.Produced;
+import org.apache.kafka.streams.state.KeyValueBytesStoreSupplier;
+import org.apache.kafka.streams.state.Stores;
+
+import io.quarkus.kafka.client.serialization.JsonbSerde;
+
+
+import io.quarkus.kafka.client.serialization.JsonbSerde;
 
 @ApplicationScoped
 public class DeliveryService {
     // Include Infinispan, Kafka and Jaeger
+    private static final Logger LOG = LoggerFactory.getLogger(DeliveryService.class);
 
-    private Set<Truck> trucks = Collections.synchronizedSet(new LinkedHashSet<>());
-    private Set<Order> orders = Collections.synchronizedSet(new LinkedHashSet<>());
+    private static final String ORDERS_TOPIC = "orders";
 
+    // public void deliver() {
+    //     StreamsBuilder builder = new StreamsBuilder();
 
-    public DeliveryService() {
-        trucks.add(new Truck("AMF T61", "Ford Transit Cargo Van"));
-    }
+    //     JsonbSerde<Order> ordersSerde = new JsonbSerde<>(
+    //             Order.class);
 
-    public Order registerOrder(Order order) {
-        order.status = "created";
-        order.id = UUID.randomUUID().toString();
-        for (Parcel parcel : order.items) {
-            parcel.id =  UUID.randomUUID().toString();
-        }
-        orders.add(order);
-        deliverOrder(order);
-        return order;
-    }   
-    
-	private void deliverOrder(Order order) {
-        Route route = new Route(trucks.iterator().next(), order.origin, order.destination, Duration.ofMinutes(1));
-        try {
-            TimeUnit.MINUTES.sleep(1);
-            order.status = "delivered";
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public Order retrieveOrder(String id) {
-        for (Order order : orders) {
-            if (order.id == id) {
-                return order;
-            }
-        }
-		return null;
-	}
-    
+    //     GlobalKTable<String, Orders> stations = builder.globalTable( 
+    //         ORDERS_TOPIC,
+    //         Consumed.with(Serdes.Integer(), ordersSerde));
+    //     // order.status = "delivered";
+    //     // LOG.warn(order.toString());
+    // }
 }
